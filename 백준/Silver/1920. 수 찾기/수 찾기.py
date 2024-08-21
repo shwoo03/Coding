@@ -15,3 +15,8 @@ for num in B:
         print(1)
     else:
         print(0)
+
+
+# 정보!
+# list는 모든 요소를 순차탐색 하는데 
+# set은 해시테이블을 사용하기 때문에 O(1)에 탐색 가능하다.
