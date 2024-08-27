@@ -11,6 +11,8 @@ rope = []
 for i in range(N):
     rope.append(int(input()))
 
+# 짜피 로프는 병렬 연결이 가능하고 최소 중량을 들 수 있는 로프가 최대 중량을 들 수 있는 로프의 중량을 제한한다.
+# 정렬해서 남은 개수만큼 곱하고 그 중에서 최대값을 찾으면 된다.
 rope.sort()
 
 max_weight = 0
