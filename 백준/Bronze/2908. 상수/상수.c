@@ -34,8 +34,6 @@ int main(){
         printf("%s\n", reverse_str);
     } else if (strcmp(reverse_str, reverse_str2) < 0) {
         printf("%s\n", reverse_str2);
-    } else {
-        printf("Both reversed strings are equal.\n");
     }
 
     return 0;
