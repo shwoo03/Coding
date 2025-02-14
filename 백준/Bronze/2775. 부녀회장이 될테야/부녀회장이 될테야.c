@@ -8,41 +8,34 @@
 #define TRUE 1 
 #define FALSE 0
 
-int apt_num(int k, int n, int arr[][n]){
-    for(int i = 0; i < n; i++){
-        arr[0][i] = i + 1;
+
+int find_apt(int floor, int room, int apt[15][15]){
+    for(int i = 0; i < 15; i++){
+        apt[0][i] = i+1;
     }
 
-    for (int i = 1; i <= k; i++) { 
-        for (int j = 0; j < n; j++) {
-            if (j == 0) {
-                arr[i][j] = 1;
-            } else {
-                arr[i][j] = arr[i][j-1] + arr[i-1][j];
+    for(int i = 1; i < 15; i++){
+        for(int j = 0; j < 15; j++){
+            for(int k = 0; k <= j; k++){
+                apt[i][j] += apt[i-1][k];
             }
         }
     }
-
-    return arr[k][n-1];
+    
+    return apt[floor][room-1];
 }
-
 
 int main() {
     int T;
     scanf("%d", &T);
 
     for(int i = 0; i < T; i++){
-        int k, n;
-        scanf("%d %d", &k, &n);
+        int apt[15][15] = {0, };
 
-        int arr[k+1][n+1];
-        for(int i = 0; i < k; i++){
-            for(int j = 0; j < n; j++){
-                arr[i][j] = 0;
-            }
-        }
+        int floor, room;
+        scanf("%d %d", &floor, &room);
 
-        printf("%d\n", apt_num(k, n, arr));
+        printf("%d\n", find_apt(floor, room, apt));
     }
 
 
