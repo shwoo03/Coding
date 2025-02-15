@@ -13,8 +13,6 @@ int main() {
     int rise, fall, goal;
     scanf("%d %d %d", &rise, &fall, &goal);
 
-    int days = 0;
-
     // 시간 제한 때문에 그냥 무지성 코드 작성은 안될듯 
     // days = (goal - rise) / (rise - fall) + 1;
 
