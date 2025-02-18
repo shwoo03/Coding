@@ -31,11 +31,6 @@ int main(){
         }
         
         num++;
-
-        if(count == N){
-            printf("%d\n", num);
-            break;
-        }
     }
 
     return 0;
