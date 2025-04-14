@@ -35,7 +35,7 @@ def bfs(x, y, maze, visited):
                     visited[nx][ny] = True
                     queue.append((nx, ny))
     
-    print(-1)  # 도달할 수 없는 경우 -1 출력
+    print(-1)  
 
 
 
