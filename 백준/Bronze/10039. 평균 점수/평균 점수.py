@@ -1,9 +1,19 @@
-sum = 0
+import sys
+input = sys.stdin.readline
 
-for i in range(5):
-    score = int(input())
-    if score < 40:
-        score = 40
-    sum += score
 
-print(sum//5)
+
+
+
+
+
+
+if __name__ == "__main__":
+    scores = []
+
+    for i in range(5):
+        x = int(input())
+        scores.append(40 if x < 40 else x)
+    
+    print(sum(scores) // 5)
+
