@@ -1,7 +1,16 @@
 import sys
+input = sys.stdin.readline
 
-n = int(sys.stdin.readline())
 
-for i in range(n):
-    a, b = map(int, sys.stdin.readline().split())
-    print(a + b)
+
+
+
+
+
+
+if __name__ == "__main__":
+    N = int(input())
+
+    for i in range(N):
+        a,b = map(int,input().split())
+        print(a+b)
