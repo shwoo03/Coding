@@ -1,4 +1,16 @@
-n = int(input())
+import sys
+input = sys.stdin.readline
 
-for i in range(n):
-    print("*"*(n-i))
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    N = int(input())
+
+    for i in range(N):
+        print("*" * (N - i))
+
