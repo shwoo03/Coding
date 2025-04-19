@@ -1,7 +1,18 @@
-num1 = int(input())
-num2 = input()
+import sys
+input = sys.stdin.readline
 
-for i in range(2,-1,-1):
-    print(num1 * int(num2[i]))
 
-print(num1 * int(num2))
+
+
+
+
+
+
+if __name__ == "__main__":
+    num1 = input().strip()
+    num2 = input().strip()
+
+    for i in range(3):
+        print(int(num1) * int(num2[2 - i]))  
+    
+    print(int(num1) * int(num2))
