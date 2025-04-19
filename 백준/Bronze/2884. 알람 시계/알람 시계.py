@@ -1,11 +1,23 @@
-h , m = map(int,input().split())
+import sys
+input = sys.stdin.readline
 
-if (m - 45) < 0:
-    m = 60 - (45 - m)
-    h -= 1
-    if h < 0:
-        h += 24
-    print(h, m)
-else:
-    print(h, m-45)
 
+
+
+
+
+
+
+if __name__ == "__main__":
+    h, m = map(int,input().split())
+
+    total_time = (h * 60) + m
+    total_time -= 45
+
+    h = total_time // 60
+    m = total_time % 60
+
+    if(h < 0):
+        h = 24 + h
+
+    print(f"{h} {m}")
