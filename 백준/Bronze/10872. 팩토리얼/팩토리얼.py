@@ -1,6 +1,12 @@
 import sys
-import math
 input = sys.stdin.readline
+
+
+def factorial(n):
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
 
 
 
@@ -9,4 +15,4 @@ input = sys.stdin.readline
 
 if __name__ == "__main__":
     N = int(input())
-    print(math.factorial(N))
+    print(factorial(N))
