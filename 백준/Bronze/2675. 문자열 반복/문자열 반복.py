@@ -1,8 +1,20 @@
-t = int(input())
+import sys
+input = sys.stdin.readline
 
-for i in range(t):
-    r,string = map(str,input().split())
-    r = int(r)
-    for j in string:
-        print(j * r,end="")
-    print()
+
+
+
+
+if __name__ == "__main__":
+    T = int(input())
+
+    for i in range(T):
+        n, string = input().split()
+        n = int(n)
+        
+
+        for ch in string:
+            print(ch * n, end="")
+
+        print()
+
