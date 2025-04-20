@@ -1,9 +1,21 @@
-list_num = [i for i in range(1,31)]
+import sys
+input = sys.stdin.readline
 
-for i in range(28):
-    a = int(input())
-    list_num.remove(a)
 
-sorted(list_num)
-for i in list_num:
-    print(i)
+
+
+
+
+if __name__ == "__main__":
+    list_student = [False] * 30
+
+    for index in range(28):
+        input_index = int(input())
+
+        list_student[input_index - 1] = True
+
+    
+    print(list_student.index(False) + 1)
+    print(list_student.index(False, list_student.index(False) + 1) + 1)
+    
+
