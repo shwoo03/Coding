@@ -1,9 +1,17 @@
-list_alpha = [-1 for i in range(26)]
-string = input()
+import sys
+input = sys.stdin.readline
 
-for i,v in enumerate(string):
-    index = ord(v) - 97
-    if list_alpha[index] == -1:
-        list_alpha[index] = i
 
-print(*list_alpha)
+
+
+
+if __name__ == "__main__":
+    list_alpha = [-1] * 26
+    S = input().strip()
+
+    for index, ch in enumerate(S):
+        idx = ord(ch) - ord('a')
+        if list_alpha[idx] == -1:
+            list_alpha[idx] = index
+
+    print(*list_alpha)
