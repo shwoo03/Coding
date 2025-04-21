@@ -1,9 +1,20 @@
-n = int(input())
-list_num = []
+import math
+import sys
+input = sys.stdin.readline
 
-for i in range(n):
-    list_num.append(int(input()))
 
-list_num.sort()
-for i in list_num:
-    print(i)
+
+
+
+
+
+if __name__ == "__main__":
+    N = int(input())
+
+    list_num = []
+    for i in range(N):
+        list_num.append(int(input()))
+
+    list_num.sort()
+    for num in list_num:
+        print(num)
