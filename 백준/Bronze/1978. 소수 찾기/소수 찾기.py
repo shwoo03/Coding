@@ -1,22 +1,28 @@
-n = int(input())
-list_num = list(map(int,input().split()))
-prime_num = 0
+import math
+import sys
+input = sys.stdin.readline
 
-for i in list_num:
-    if i <= 1:  # 1보다 작은 수는 소수가 아님
-        continue
-    result = True        # 0 이면 소수 1이면 소수가 아니다 
+
+
+
+
+def is_prime(num):
+    if num < 2:  
+        return 0
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
+            return 0
+    return 1
+
+
+
+if __name__ == "__main__":
+    N = int(input())
+    list_num = list(map(int, input().split()))
+
+    result = 0
+
+    for num in list_num:
+        result += is_prime(num)
     
-    for j in range(2,i,1):
-        if i % j == 0:
-            result = False
-        else:
-            pass
-    
-    if result == False:
-        pass
-    else:
-        prime_num += 1
-
-print(prime_num)
-
+    print(result)
