@@ -1,30 +1,27 @@
-dict_alpha = {
-    'c=' : 1,
-    'c-' : 1,
-    'dz=' : 1,
-    'd-' : 1,
-    'lj' : 1,
-    'nj' : 1,
-    's=' : 1,
-    'z=' : 1
-}
+import math
+import sys
+input = sys.stdin.readline
 
-input_str = input().strip()
-total_length = 0
-i = 0
 
-while i < len(input_str):
-    # 최대 3글자 이므로 3글자로 비교하고 일치하면 3글자를 더해준다.
-    if input_str[i:i+3] == 'dz=':
-        total_length += 1
-        i += 3
-    # 2글자로 비교하고 일치하면 2글자를 더해준다.
-    elif input_str[i:i+2] in dict_alpha:
-        total_length += 1
-        i += 2
-    # 일치하지 않으면 1글자를 더해준다.
-    else:
-        total_length += 1
-        i += 1
+# 단어가 주어지면 몇 개의 크로아티아 알파멧으로 이루어져 있는지 출력한다.
+# 목록에 존재하지 않는 알파벳은 한 글자씩 센다 
 
-print(total_length)
+
+if __name__ == "__main__":
+    word = input().strip()
+    c_alpha_list = ['c=', 'c-', 'd-', 'lj', 'nj', 's=', 'z=']
+    result = 0
+    index = 0
+
+    while index < len(word):
+        if word[index:index+3] == "dz=":
+            result += 1
+            index += 3
+        elif word[index:index+2] in c_alpha_list:
+            result += 1
+            index += 2
+        else:
+            result += 1
+            index += 1
+
+    print(result)
