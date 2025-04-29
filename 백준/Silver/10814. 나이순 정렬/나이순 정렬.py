@@ -1,13 +1,20 @@
-N = int(input())
+import math
+import sys
+input = sys.stdin.readline
 
-list_DB = []
 
-for i in range(N):
-    age, name = input().split()
+# 나이, 가입 순서 순으러 정렬하기 
+
+
+if __name__ == "__main__":
+    T = int(input())
+    list_member = []
+
+    for i in range(T):
+        age, name = input().split()
+        list_member.append([int(age), name, i])
     
-    list_DB.append((int(age), name))
+    ordered_list_member = sorted(list_member, key=lambda member: (member[0], member[2]))
 
-list_DB.sort(key = lambda x: x[0])
-
-for i in list_DB:
-    print(i[0], i[1])
+    for member_info in ordered_list_member:
+        print(member_info[0], member_info[1])
