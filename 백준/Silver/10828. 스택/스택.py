@@ -1,33 +1,35 @@
-# 스택구현 문제이다.
-# push : x 정수 x를 스택에 넣는 연산이다.
-# pop : 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
-# size : 스택에 들어있는 정수의 개수를 출력한다.
-# empty : 스택이 비어있으면 1, 아니면 0을 출력한다.
-# top : 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
-
+import math
 import sys
+input = sys.stdin.readline
 
-n = int(sys.stdin.readline())
-stack = []
 
-for _ in range(n):
-    command = sys.stdin.readline().split()
-    if command[0] == 'push':
-        stack.append(command[1])
-    elif command[0] == 'pop':
-        if len(stack) == 0:
-            print(-1)
-        else:
-            print(stack.pop())
-    elif command[0] == 'size':
-        print(len(stack))
-    elif command[0] == 'empty':
-        if len(stack) == 0:
-            print(1)
-        else:
-            print(0)
-    elif command[0] == 'top':
-        if len(stack) == 0:
-            print(-1)
-        else:
-            print(stack[-1])
+
+
+
+if __name__ == "__main__":
+    list_stack = []
+    n = int(input())
+    output = []
+
+    for _ in range(n):
+        words = input().split()
+
+        if words[0] == "push":
+            list_stack.append(words[1])
+        elif words[0] == "pop":
+            if list_stack:
+                output.append(list_stack.pop())
+            else:
+                output.append("-1")
+        elif words[0] == "size":
+            output.append(str(len(list_stack)))
+        elif words[0] == "empty":
+            output.append("1" if not list_stack else "0")
+        elif words[0] == "top":
+            if list_stack:
+                output.append(list_stack[-1])
+            else:
+                output.append("-1")
+
+    for result in output:
+        print(result)
