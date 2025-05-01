@@ -1,20 +1,20 @@
-# ATM 앞에는 N명의 사람이 있다.
-# i 번 사람이 돈을 인출하는데 걸리는 시간은 P_i 분이다.
-# 줄 서는 순서에 따라서 인출하는데 걸리는 시간이 달라진다.
+import math
+import sys
+input = sys.stdin.readline
 
-# 예를 들어, 총 5명이 있고, P_i = [3, 1, 4, 3, 2] 이고, [1,2,3,4,5] 순서로 줄을 선다면 
-# 1번 사람은 3분, 2번 사람은 1분, 3번 사람은 4분, 4번 사람은 3분, 5번 사람은 2분이 걸린다.
 
-# 즉, N명의 사람이 줄을 서는 순서에 따라 각자 돈을 인출하는데 걸리는 시간이 달라진다.
-# 시간의 최솟값을 구하세요 
+# 은행 대기 줄이 주어지면 최소로 필요한 시간의 합을 구하는 프로그램 작성 
 
-N = int(input())
-P = list(map(int, input().split()))
-P.sort()
-time = 0
-result = 0
-for i in range(N):
-    time += P[i]
-    result += time
 
-print(result)
+if __name__ == "__main__":
+    N = int(input())
+
+    list_time = sorted(map(int, input().split()))
+    total = 0
+    sum = 0
+
+    for i in list_time:
+        sum += i
+        total += sum
+    
+    print(total)
