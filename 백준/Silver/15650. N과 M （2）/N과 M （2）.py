@@ -1,12 +1,19 @@
-# N,M이 주어지면, 길이가 M인 수열을 모두 구하는 프로그램 
-# 1부터 N까지의 자연수 중에서 중복 없이 M개 
-# 오름차순 
+import math
+from collections import deque
+from itertools import permutations, combinations
+import sys
+input = sys.stdin.readline
 
-from itertools import combinations
 
-N, M = map(int, input().split())
-arr = [i for i in range(1, N+1)]
+# N, M이 주어지면 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열을 모두 구하는 프로그램
+if __name__ == "__main__":
+    row, col = map(int,input().split())
+    nums = list(range(1, row+1))
 
-result = list(combinations(arr, M))
-for i in result:
-    print(*i)
+    for i in combinations(nums, col):
+        print(*i)
+
+
+
+
+
