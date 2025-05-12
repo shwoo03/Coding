@@ -1,58 +1,54 @@
-# DFS, BFS로 탐색한 결과를 출력하는 프로그램 
-# 1. 방문 가능한 정점이 여러 개인 경우에는 정점 번호가 작은 것을 먼저 방문한다.
-# 2. 더 이상 방문할 수 없는 점이 없는 경우 종료.
-# 3. 정점 번호는 1 ~ N 까지 
+import math
+from collections import deque
+from itertools import permutations, combinations
+import sys
+input = sys.stdin.readline
 
 
-# DFS
-def dfs(graph, start, visited):
-    visited[start] = 1
-    print(start, end=' ')
+# DFS, BFS 탐색 결과를 출력하는 프로그램 작성 
+# 방문할 수 있는 정점이 여러 개면 정점 번호가 작은 것 먼저 방문 
 
-    for i in range(1, len(graph)):
-        if graph[start][i] == 1 and visited[i] == 0:
-            dfs(graph, i, visited)
+def DFS(v, graph, visited, N):
+    visited[v] = True
+    print(v, end=' ')
+    
+    for i in range(1, N + 1):
+        if graph[v][i] == 1 and not visited[i]:
+            DFS(i, graph, visited, N)
 
 
 
-def bfs(graph, start, visited):
-    queue = [start]
-    visited[start] = 1
-    print(start, end=' ')
+def BFS(v, graph, visited, N):
+    queue = deque([v])
+    visited[v] = True
 
     while queue:
-        v = queue.pop(0)
-        for i in range(1, len(graph)):
-            if graph[v][i] == 1 and visited[i] == 0:
+        node = queue.popleft()
+        print(node, end=' ')
+
+        for i in range(1, N + 1):
+            if graph[node][i] == 1 and not visited[i]:
+                visited[i] = True
                 queue.append(i)
-                visited[i] = 1
-                print(i, end=' ')
 
 
 
 
-if __name__ == '__main__':
-    N, M, V = map(int, input().split())
+
+if __name__ == "__main__":
+    N, M, V = map(int,input().split())
+    graph = [[0 for i in range(N+1)] for j in range(N+1)]
     
-    # 인접 행렬로 접근 
-    graph = [[0] * (N + 1) for _ in range(N + 1)]
-
-    # 정보 입력 
-    for _ in range(M):
-        a,b = map(int, input().split())
-        graph[a][b] = 1
-        graph[b][a] = 1
+    for i in range(M):
+        x, y = map(int,input().split())
+        graph[x][y] = 1
+        graph[y][x] = 1
     
-    # 방문 여부 
-    visited = [0] * (N + 1)
 
-    dfs(graph, V, visited)
+    visited_dfs = [False] * (N + 1)
+    DFS(V, graph, visited_dfs, N)
     print()
 
-
-    visited = [0] * (N + 1)
-    bfs(graph, V, visited)
-
-
-
-
+    visited_bfs = [False] * (N + 1)
+    BFS(V, graph, visited_bfs, N)
+    print()
