@@ -1,36 +1,43 @@
+import math
+from collections import deque
+from itertools import permutations, combinations
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(100000)
 
 
-# stack에 push하는 순서는 반드시 오름차순을 지키도록 한다고 하자.
-# 임의 수열이 주어지면 스택을 이용하여 그 수열을 만들 수 있는지 없는지 있다면 
-# 어떤 순서로 push pop을 해야하는지 출력
+# 스택을 사용해서 1부터 n까지 증가하고 받은 수열이 완성되는지 확인
 
 
-
-
-if __name__ == '__main__':
-    n = int(input())
-    stack = []
-    input_list = []
+if __name__ == "__main__":
     result = []
-    idx = 0
+    stack = []
+    T = int(input())
+    input_list = []
 
-    for i in range(n):
+    for i in range(T):
         input_list.append(int(input()))
-        stack.append(i + 1)
-        result.append("+")
+    
+    for i in range(1, T+1):
+        stack.append(i)
+        result.append('+')
 
-        while stack and stack[-1] == input_list[idx]:
-            pop_num = stack.pop()
-            result.append("-")
-            idx += 1
-            if idx == n:
+        while True:
+            if stack:
+                if stack[-1] == input_list[0]:
+                    result.append("-")
+                    stack.pop()
+                    input_list.pop(0)
+                else:
+                    break
+            else:
                 break
 
-
-    if len(stack) != 0:
+    
+    if stack:
         print("NO")
     else:
-        for i in result:
-            print(i)
+        for ch in result:
+            print(ch)
+
+
