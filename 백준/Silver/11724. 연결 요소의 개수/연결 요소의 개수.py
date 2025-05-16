@@ -1,42 +1,44 @@
+import math
+from collections import deque
+from itertools import permutations, combinations
 import sys
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
+sys.setrecursionlimit(100000)
 
 
+# 무방향 그래프에서 연결 요소 구하는 프로그램 작성 
+# 탐색을 통해서 연결 요소의 집합을 찾으면 된다.
+def BFS(start, visited, graph):
+    visited[start] = True
+    queue = deque([start])
 
-# 무방향 그래프에서 연결 요소의 개수를 구하는 프로그램 작성 
-# dfs 써서 gourp 이 몇개인지 확인하면 됨 
+    while queue:
+        node = queue.popleft()
 
-def dfs(v, matrix, visited, group_count):
-    visited[v] = 1
-
-    for i in range(1, len(matrix)):
-        if matrix[v][i] == 1 and visited[i] == 0:
-            dfs(i, matrix, visited, group_count)
-
+        for neighbor in range(len(graph[node])):
+            if not visited[neighbor] and graph[node][neighbor]:
+                queue.append(neighbor)
+                visited[neighbor] = True
 
 
 
 if __name__ == "__main__":
-    # 인접 행렬 
-    N, M = map(int, input().split())
-
-    matrix = [[0] * (N + 1) for _ in range(N + 1)]
-    for _ in range(M):
-        a,b = map(int, input().split())
-        matrix[a][b] = 1
-        matrix[b][a] = 1
+    node, edge = map(int,input().split())
+    graph = [[0 for i in range(node)] for i in range(node)]
     
-
-    visited = [0] * (N + 1)
-    group_count = 0
-
-    for i in range(1, N + 1):
-        if visited[i] == 0:
-            dfs(i, matrix, visited, group_count)
-            group_count += 1
+    for i in range(edge):
+        x, y = map(int,input().split())
+        x = x - 1
+        y = y - 1
+        graph[x][y] = 1
+        graph[y][x] = 1
     
-    print(group_count)
+    count = 0
+    visited = [False] * node
 
-
-
+    for i in range(node):
+        if not visited[i]:
+            BFS(i, visited, graph)
+            count += 1
+    
+    print(count)
