@@ -1,26 +1,29 @@
+import math
+from collections import deque
+from itertools import permutations, combinations
 import sys
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 
-# n개 정수로 이루어진 임의 수열이 주어짐 
-# 연속된 몇 개의 수를 선택해서 구할 수 있는 합 중 가장 큰 합을 구하려고 함 
+# n개의 정수로 이루어진 수열이 주어짐 
+# 여기서 선택을 통해 최대 합을 구하려고 함 
 # 단, 수는 한 개 이상 선택해야 함 
+#   max 값을 정해놓고 i번째 까지의 + arr[i] 가 현재 배열의 arr[i] 값보다 작다면?
+#   max 값을 arr[i]로 바꿔야 다시 최대 값을 찾을 수 있을 것이다.
+#   즉, 점화식은 dp[i] = max(dp[i-1] + arr[i], arr[i])
 
 
 
 
 if __name__ == "__main__":
-    n = int(input())
-    num_list = list(map(int, input().split()))
+    N = int(input())
+    list_num = list(map(int, input().split()))
+    dp = [0] * N
+    dp[0] = list_num[0]
 
-    # 판단 기준은 2가지이다.
-    # 1. 현재 수가 다음 수를 더한 것보다 크면 현재 수를 선택한다. (즉, 새로 시작하는 것)
-    # 2. 현재 수가 다음 수를 더한 것보다 작으면 다음 수를 선택한다. (즉, 계속 이어서 더하는 것)
-    dp = [0] * n
-    dp[0] = num_list[0]
+    for i in range(1, N):
+        dp[i] = max(dp[i-1] + list_num[i], list_num[i])
+        
+    
+    print(max(dp))
 
-    for i in range(1, n):
-        dp[i] = max(num_list[i], dp[i-1] + num_list[i])
-
-print(max(dp))
