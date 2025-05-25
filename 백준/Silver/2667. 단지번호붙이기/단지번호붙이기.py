@@ -1,42 +1,40 @@
+import math
+import heapq
+from collections import deque
+from itertools import permutations, combinations
 import sys
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 
-# 정사각형 배열에서 0,1로 나누어 지는데
-# 각 1의 그룹의 개수를 확인해야 한다.
+# 1은 집이 있는 곳을 0은 집이 없는 곳을 의미한다. 
+# 각 단지에 속한 집의 수를 오름차순으로 정렬해서 출력해야 한다.
 
-# 상하좌우를 탐색하면서 1의 그룹을 찾고 
-# bfs로 탐색 
-from collections import deque
+# 1. bfs 함수를 만들고 맨 마지막에 결과 값 보내주기 
+# 2. 받고 정렬해서 출력 
 
-def bfs_find_houses(houses, visited, result_list):
+def bfs(graph, N, visited, row, col):
+    queue = deque()
+    queue.append((row, col))
+    visited[row][col] = True
+    count = 1
+
     dx = [-1, 1, 0, 0]
     dy = [0, 0, -1, 1]
 
-    queue = deque()
-    house_count = 0
+    while queue:
+        x, y = queue.popleft()
 
-    for i in range(len(houses)):
-        for j in range(len(houses)):
-            if houses[i][j] == 1 and not visited[i][j]:
-                # 첫 그룹 시작점 찾고 1로 초기화
-                queue.append((i,j))
-                visited[i][j] = True
-                house_count = 1
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
 
-                while queue:
-                    x, y = queue.popleft()
-                    
-                    for k in range(4):
-                        nx = x + dx[k]
-                        ny = y + dy[k]
-
-                        if 0 <= nx < len(houses) and 0 <= ny < len(houses) and not visited[nx][ny] and houses[nx][ny] == 1:
-                            queue.append((nx, ny))
-                            visited[nx][ny] = True
-                            house_count += 1
-                result_list.append(house_count)
+            if 0 <= nx < N and 0 <= ny < N:
+                if graph[nx][ny] == 1 and visited[nx][ny] == False:
+                    count += 1
+                    visited[nx][ny] = True
+                    queue.append((nx, ny))
+    
+    return count
 
 
 
@@ -44,13 +42,22 @@ def bfs_find_houses(houses, visited, result_list):
 
 if __name__ == "__main__":
     N = int(input())
-    houses = [list(map(int, input().rstrip())) for _ in range(N)]
-    visited = [[False] * N for _ in range(N)]
-    result_list = []
+    graph = []
+    total_num = 0
 
-    bfs_find_houses(houses, visited, result_list)
-    result_list.sort()
+    for i in range(N):
+        graph.append(list(map(int, input().strip())))
 
-    print(len(result_list))
-    for result in result_list:
-        print(result)
+    visited = [[False] * N for _ in range(N)]   
+    list_result = []
+
+    for row in range(N):
+        for col in range(N):
+            if visited[row][col] == False and graph[row][col] == 1:
+                list_result.append(bfs(graph, N, visited, row, col))
+                total_num += 1
+    
+    list_result.sort()
+    print(total_num)
+    for num in list_result:
+        print(num)
