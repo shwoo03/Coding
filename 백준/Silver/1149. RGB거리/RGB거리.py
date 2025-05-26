@@ -1,45 +1,35 @@
+import math
+import heapq
+from collections import deque
+from itertools import permutations, combinations
 import sys
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 
-# RGB 거리에는 N개의 집이 있음 
-# 거리는 선분으로 나타낼 수 있고, 1 ~ N 집이 순서대로 존재함 
-# 빨, 초, 파 중 하나로 칠해야 한다.
-# 각 색의 비용이 주어졌을 때 아래 규칙을 만족하면서 모든 집을 칠하는 최소 비용 구하기
-
-# 1. 1번 집의 색은 2번 집의 색과 같지 않아야 함.
-# 2. N번 집의 색은 N-1번 집의 색과 같지 않아야 함.
-# 3. i(2 <= i <= N-1)번 집의 색은 i-1번, i+1번 집의 색과 같지 않아야 함.
-
-
-# DP로 풀 수 있을듯함.
-# dp[i][j] = i번째 집을 j색으로 칠했을 때 최소 비용 
-
-
+# 1 ~ N개의 집의 지붕을 빨, 초, 파 중에 하나로 색칠해야함 
+# 각 색의 비용지 주어졌을 때 아래 규칙을 만족하는 최솟값을 구하기 
+#   1번 집의 색은 2번 집의 색과 같지 않아야 한다.
+#   N번 집의 색은 N-1번 집의 색과 같지 않아야 한다.
+#   i번 집의 색은 i-1번, i+1번 집의 색과 같지 않아야 한다. 
+# 즉, 이웃한 집의 색은 서로 달라야 한다. 
+#   그렇다면 각 집을 3가지 색으로 칠했을 때의 모든 비용을 dp 배열에 저장하고 
+#   그 중에서 min 함수를 사용해서 가장 낮은 비용을 가진 값과 더하면 된다. 
 
 
 if __name__ == "__main__":
-    N = int(input())
-    cost = [None] + [list(map(int, input().split())) for _ in range(N)]
-    dp = [[0] * 3 for _ in range(N+1)]
+    house_num = int(input())
+    list_cost = []
+    for i in range(house_num):
+        list_cost.append(list(map(int, input().split())))
 
-    dp[1][0] = cost[1][0] # 빨 
-    dp[1][1] = cost[1][1] # 초
-    dp[1][2] = cost[1][2] # 파 
+    dp = [[0] * 3 for i in range(house_num)]
+    dp[0][0] = list_cost[0][0]
+    dp[0][1] = list_cost[0][1]
+    dp[0][2] = list_cost[0][2]
 
-    for i in range(2, N+1):
-        dp[i][0] = min(dp[i-1][1], dp[i-1][2]) + cost[i][0] # 빨간색 + min(초, 파)
-        dp[i][1] = min(dp[i-1][0], dp[i-1][2]) + cost[i][1] # 초록색 + min(빨, 파)
-        dp[i][2] = min(dp[i-1][0], dp[i-1][1]) + cost[i][2] # 파란색 + min(빨, 초)
+    for i in range(1, house_num):
+        dp[i][0] = min(dp[i-1][1], dp[i-1][2]) + list_cost[i][0] # 전 색이 빨 - 그렇다면 min(초,파) + 이전 cost 
+        dp[i][1] = min(dp[i-1][0], dp[i-1][2]) + list_cost[i][1] # 전 색이 초 - 그렇다면 min(빨,파) + 이전 cost
+        dp[i][2] = min(dp[i-1][0], dp[i-1][1]) + list_cost[i][2] # 전 색이 파 - 그렇다면 min(빨,초) + 이전 cost 
 
-    print(min(dp[N]))
-
-
-# 25 40 83
-# 49 60 57
-# 13 89 99
-
-# dp = [26, 40, 83]
-# dp = [89, 86, 83]
-# dp = [96, 172, 185]
+    print(min(dp[house_num-1]))
