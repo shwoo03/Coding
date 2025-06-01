@@ -1,6 +1,18 @@
-n,x = map(int,input().split())
-a_list = list(map(int,input().split()))
+import math
+import heapq
+from collections import deque
+from itertools import permutations, combinations
+import sys
+input = sys.stdin.readline
 
-for i in range(n):
-    if a_list[i] < x:
-        print(a_list[i],end=" ")
+
+
+
+# x보다 작은 수
+if __name__ == "__main__":
+    N, X = map(int,input().split())
+    list_num = list(map(int, input().split()))
+
+    for num in list_num:
+        if num < X:
+            print(num, end=" ")
