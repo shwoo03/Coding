@@ -15,14 +15,15 @@ input = sys.stdin.readline
 
 if __name__ == "__main__":
     L = int(input())
-    word = input()
-    list_value = []
+    word = input().strip()
+    result = 0
 
     r = 31
     M = 1234567891
 
     for i in range(L):
         char_to_int = ord(word[i]) - ord('a') + 1
-        list_value.append(char_to_int * ((pow(r, i)) % M))
+        temp = (char_to_int * pow(r, i, M)) % M
+        result = (result + temp) % M
 
-    print(sum(list_value))
+    print(result)
