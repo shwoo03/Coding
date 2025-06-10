@@ -1,18 +1,27 @@
-def bino_coef(n, r):
-    cache = [[0 for _ in range(r+1)] for _ in range(n+1)]
+import math
+import heapq
+from collections import deque
+from itertools import permutations, combinations
+import sys
+input = sys.stdin.readline
 
-    for i in range(n+1):
-        cache[i][0] = 1
-    for i in range(r+1):
-        cache[i][i] = 1
 
-    for i in range(1, n+1):
-        for j in range(1, r+1):
-            cache[i][j] = cache[i-1][j] + cache[i-1][j-1]
+# 이항 계수를 구하려면 N! / K!(N-K)! 이다.
 
-    return cache[n][r]
 
-n,k = map(int,input().split())
-result = bino_coef(n,k)
+if __name__ == "__main__":
+    N, K = map(int, input().split())
 
-print(result)
+    son = 1
+    for i in range(1, N+1):
+        son *= i
+    
+    mom = 1
+    N_K = N - K
+    for i in range(1, N_K+1):
+        mom *= i
+    
+    for i in range(1, K+1):
+        mom *= i
+    
+    print(son // mom)
