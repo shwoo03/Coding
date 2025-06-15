@@ -1,25 +1,33 @@
-a = input()
-b = input()
-c = input()
+import math
+import heapq
+from collections import deque
+from itertools import permutations, combinations
+import sys
+input = sys.stdin.readline
 
-def numerical_judgment(a,b,c):
-    if(a.isdigit()):
-        return int(a) + 3
-    elif(b.isdigit()):
-        return int(b) + 2
-    elif(c.isdigit()):
-        return int(c) + 1
 
-num = numerical_judgment(a,b,c)
+def check_fizzbuzz(number):
+    if number % 15 == 0:  
+        print("FizzBuzz")
+    elif number % 3 == 0: 
+        print("Fizz")
+    elif number % 5 == 0: 
+        print("Buzz")
+    else:                 
+        print(number)
 
-def fizzbuzz(num):
-    if(num % 3 == 0 and num % 5 == 0):
-        return "FizzBuzz"
-    elif(num % 3 == 0):
-        return "Fizz"
-    elif(num % 5 == 0):
-        return "Buzz"
-    else:
-        return num
 
-print(fizzbuzz(num))
+if __name__ == "__main__":
+    a = input().strip()
+    b = input().strip()
+    c = input().strip()
+
+    if a.isdigit():
+        num_a = int(a) + 3
+        check_fizzbuzz(num_a)
+    elif b.isdigit():
+        num_b = int(b) + 2
+        check_fizzbuzz(num_b)
+    elif c.isdigit():
+        num_c = int(c) + 1
+        check_fizzbuzz(num_c)
