@@ -1,0 +1,37 @@
+section .data
+    in_fmt  db "%d %d", 0 ; scanf 용 포맷 문자열
+    out_fmt db "%d", 0 ; printf 용 포맷 문자열 뒤에 0은 NULL 문자
+
+section .bss
+    a resd 1 ; double word (4 bytes) 예약  즉 4바이트 int 변수
+    b resd 1 ; double word (4 bytes) 예약  즉 4바이트 int 변수
+
+section .text
+    global main
+    extern printf
+    extern scanf
+
+main:
+    push rbp
+
+    ; scanf("%d %d", &a, &b)
+    mov rdi, in_fmt ; 첫 인자로 포맷 문자열 주소 전달
+    lea rsi, [rel a] ; 두 번째 인자로 a의 주소 전달 rel은 RIP 상대 주소 지정
+    lea rdx, [rel b] ; 세 번째 인자로 b의 주소 전달
+    xor rax, rax ; rax를 0으로 설정 (가변 인자 함수 호출 시 필요)
+    call scanf ; scanf 호출
+
+    ; eax = a + b
+    mov eax, [a] ; eax에 a의 값 로드
+    add eax, [b] ; eax에 b의 값 더하기
+
+    ; printf("%d", a+b)
+    mov rdi, out_fmt ; 첫 번째 인자로 포맷 문자열 주소 전달
+    mov esi, eax ; 두 번째 인자로 a+b의 값 전달
+    xor rax, rax ; rax를 0으로 설정 (가변 인자 함수 호출 시 필요)
+    call printf ; printf 호출
+
+    ; return 0
+    xor rax, rax ; rax를 0으로 설정 (main 함수의 반환 값)
+    pop rbp ; rbp 복구 
+    ret ; main 함수 종료
