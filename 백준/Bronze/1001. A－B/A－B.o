@@ -1,0 +1,37 @@
+section .data
+    scanf_fmt db "%d %d", 0
+    printf_fmt db "%d" , 0
+
+section .bss
+    a resd 1
+    b resd 1
+    result resd 1
+
+section .text
+    global main
+    extern printf, scanf
+
+main:
+    ; scanf("%d %d", &a, &b);
+    push rbp 
+    mov rdi, scanf_fmt
+    lea rsi, [a]
+    lea rdx, [b]
+    xor rax, rax
+    call scanf
+
+    ; result = a - b
+    mov eax, [a]
+    sub eax, [b]
+    mov [result], eax
+
+    ; printf("%d", result);
+    mov rdi, printf_fmt
+    mov esi, [result]
+    xor rax, rax
+    call printf
+
+    ; return 0
+    mov rax, 0
+    pop rbp
+    ret
