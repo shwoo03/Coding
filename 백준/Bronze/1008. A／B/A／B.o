@@ -1,0 +1,39 @@
+section .data
+    scanf_fmt  db "%d %d", 0        
+    printf_fmt db "%.12f", 10, 0        
+
+section .bss
+    a:          resd 1
+    b:          resd 1
+    double_var: resq 1
+
+section .text
+    global main
+    extern printf, scanf
+
+main:
+    push rbp
+    mov rbp, rsp
+
+    ; scanf("%d %d", &a, &b)
+    mov rdi, scanf_fmt
+    lea rsi, [rel a]
+    lea rdx, [rel b]
+    xor rax, rax
+    call scanf
+
+    ; double 계산: (double)a / (double)b
+    cvtsi2sd xmm0, dword [rel a]  
+    cvtsi2sd xmm1, dword [rel b]   
+    divsd   xmm0, xmm1            
+    movq    [rel double_var], xmm0 
+
+    ; printf("%.12f\n", double_var)
+    mov     rdi, printf_fmt
+    movq    xmm0, [rel double_var] 
+    mov     al, 1                  
+    call    printf
+
+    xor eax, eax               
+    leave
+    ret
