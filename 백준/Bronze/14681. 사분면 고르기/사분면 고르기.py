@@ -1,11 +1,12 @@
-x = int(input())
-y = int(input())
+a = int(input())
+b = int(input())
 
-if x > 0 and y > 0:
+if a > 0 and b > 0:
     print("1")
-elif x > 0 and y < 0 :
-    print("4")
-elif x < 0 and y > 0:
+elif a < 0 and b > 0:
     print("2")
-else:
+elif a < 0 and b < 0:
     print("3")
+else:
+    print("4")
+
