@@ -1,3 +1,3 @@
-st = input()
+name = input()
 
-print(st + "??!")
+print(f"{name}??!")
