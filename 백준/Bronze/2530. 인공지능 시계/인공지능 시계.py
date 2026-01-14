@@ -1,23 +1,18 @@
-hour,minute,second = map(int,input().split())
-rq_second = int(input())
+# 입력: 시, 분, 초 및 조리 시간(초)
+# 출력: 종료되는 시각 시, 분, 초
 
-hour = hour + (rq_second // 3600)
-rq_second = rq_second % 3600
+hour, minute, second = map(int, input().split())
+cooking_time = int(input())
 
-minute = minute + (rq_second // 60)
-rq_second = rq_second % 60
+# 1. 초 단위로 변환 
+total_seconds = hour * 3600 + minute * 60 + second + cooking_time
 
-second += rq_second
+# 2. 24시간 형식으로 변환
+total_seconds %= 86400  # 하루는 86400초
+end_hour = total_seconds // 3600
+total_seconds %= 3600
+end_minute = total_seconds // 60
+end_second = total_seconds % 60
 
-while second >= 60:
-    second -= 60
-    minute += 1
-
-while minute >= 60:
-    minute -= 60
-    hour += 1
-
-while hour >= 24:
-    hour -= 24
-
-print(hour, minute, second)
+# 3. 결과 출력
+print(end_hour, end_minute, end_second)
