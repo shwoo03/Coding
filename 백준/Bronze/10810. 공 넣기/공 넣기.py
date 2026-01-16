@@ -1,9 +1,10 @@
-n , m = map(int,input().split())
-list_num = [0 for i in range(n)]
+basket , n = map(int,input().split())
+ball = [0 for i in range(basket)]
 
-for i in range(m):
-    i, j, k = map(int,input().split())
-    for index in range(i-1,j,1):
-        list_num[index] = k
+for i in range(n):
+    x, y, number = map(int,input().split())
+    
+    for i in range(x-1, y):
+        ball[i] = number
 
-print(*list_num)
+print(*ball)
