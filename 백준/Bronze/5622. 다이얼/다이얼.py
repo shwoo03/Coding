@@ -1,11 +1,12 @@
-list_num = ["ABC","DEF","GHI","JKL","MNO","PQRS","TUV","WXYZ"]
-time = 0
+# 기본 2초 (다이얼 1) + 추가 1초 (다이얼 2~9)
+alpha_list = [[0], [0], [0], ['A','B','C'], ['D', 'E', 'F'], ['G', 'H', 'I'], ['J', 'K', 'L'],
+         ['M', 'N', 'O'], ['P', 'Q', 'R', 'S'], ['T', 'U', 'V'], ['W', 'X', 'Y', 'Z']]
 
-char = input()
-for ch in char:
-    time += 2
-    for i in list_num:
-        if ch in i:
-            time += (list_num.index(i) + 1)
+get_input = list(input())
+# print(get_input) -> WA == ['W', 'A']
 
-print(time)
+result = 0
+for ch in get_input:
+    result += alpha_list.index([i for i in alpha_list if ch in i][0])
+
+print(result)
