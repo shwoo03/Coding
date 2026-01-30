@@ -1,9 +1,9 @@
-board = [list(input().ljust(15,' ')) for _ in range(5)]
-result = ''
+list_word = [list(input().strip()) for _ in range(5)]
 
 for j in range(15):
     for i in range(5):
-        if board[i][j] != ' ':
-            result += board[i][j]
+        try:
+            print(list_word[i][j], end='')
+        except IndexError:
+            continue
 
-print(result)
