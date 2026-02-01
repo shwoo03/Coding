@@ -1,13 +1,14 @@
-# y 좌표가 증가하는 순으로, 같으면 x 좌표가 증가하는 순으로 정렬한 다음 출력 
+# 2차원 평면 위에 점 N 개 
+# 1차 : y좌표 증가 순 / 2차 : x 좌표 증가 순 
 
 N = int(input())
+list_num = []
 
-arr = []
-for _ in range(N):
-    x, y = map(int, input().split())
-    arr.append((x, y))
+for i in range(N):
+    temp_list = list(map(int, input().split()))
+    list_num.append(temp_list)
 
-arr.sort(key=lambda x: (x[1], x[0]))
+list_num.sort(key=lambda p: (p[1], p[0]))
 
-for x, y in arr:
+for x, y in list_num:
     print(x, y)
