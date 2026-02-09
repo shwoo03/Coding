@@ -1,16 +1,20 @@
-# 숫자 카드는 정수 하나가 적혀져 있는 카드이다. 
-# 카드 N개를 가지고 있고, 정수 M개가 주어졌을 때, 이 수가 적혀있는 숫자 카드를 상근이가 가지고 있는지 아닌지 구하는 프로그램을 작성하시오.
+# N -> 카드 개수 
+# list_num -> 카드에 적혀있는 정수 
+# M -> 질문 개수?
+# list_m -> 질문에 적힌 정수
 
 N = int(input())
-N_list = list(map(int, input().split()))
-
+list_num = list(map(int, input().split()))
 M = int(input())
-M_list = list(map(int, input().split()))
+list_m = list(map(int, input().split()))
 
-set_N = set(N_list)
+dict_m = {
+    num: 0 for num in list_m
+}
 
-for i in M_list:
-    if i in set_N:
-        print(1, end=' ')
-    else:
-        print(0, end=' ')
+for num in list_num:
+    if num in dict_m:
+        dict_m[num] += 1
+
+for result in dict_m.values():
+    print(result, end=' ')
