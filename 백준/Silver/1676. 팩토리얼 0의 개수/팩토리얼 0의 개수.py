@@ -1,10 +1,15 @@
 N = int(input())
 
-result = 0
-i = 5
+fact = 1
+for i in range(1, N + 1):
+    fact *= i
 
-while N // i > 0:
-    result += N // i
-    i *= 5
+str_fact = str(fact)
+count = 0
+for char in reversed(str_fact):
+    if char == '0':
+        count += 1
+    else:
+        break  
 
-print(result)
+print(count)
