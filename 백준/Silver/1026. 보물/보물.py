@@ -1,21 +1,22 @@
-# 길이가 N인 정수 배열 A와 B가 있다.
-# 함수 S를 정의하면 S = A[0]*B[0] + A[1]*B[1] + ... + A[N-1]*B[N-1]이다.
-# S의 값을 가장 작게 만들기 위한 A의 순서를 구하라.
-# 단, B에 있는 수는 재배열하면 안된다.
-# S의 최솟값을 출력하는 프로그램을 작성하시오.
+# S = A[0] * B[0] + ... + A[N-1] * B[N-1]
+    # S의 값을 가장 작게 만들기 위해 A의 수를 재배열 해야한다. 단, B는 건들이면 안된다.
+    # 입력: N, A배열, B배열 
+    # 출력: S의 최솟값 
 
-import sys 
-input = sys.stdin.readline
+'''
+    A배열은 오름차순 B 배열은 내림차순으로 정렬해서 각각의 원소를 곱하면 S의 최솟값이 될 것임 
+'''
 
 N = int(input())
-list_A = list(map(int, input().split()))
-list_B = list(map(int, input().split()))
 
-list_A.sort()
-list_B.sort(reverse=True)
-sum = 0
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
 
+A.sort()
+B.sort(reverse=True)
+
+S = 0
 for i in range(N):
-    sum += list_A[i] * list_B[i]
+    S += A[i] * B[i]
 
-print(sum)
+print(S)
